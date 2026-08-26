@@ -738,22 +738,21 @@ function ExpeditionBuilderPanel({
               className={`mb-3 text-[11px] ${showLandWarning ? "font-semibold" : "text-zinc-500"}`}
               style={showLandWarning ? { color: "#c0483f" } : undefined}
             >
-              <p>
-  {showLandWarning
-    ? t("buildRouteLandRejected")
-    : points.length < 2
-      ? `${t("buildRouteAddMore")} (${2 - points.length})`
-      : t("buildRouteReadyToStart")}
-</p>
-<button
-  type="button"
-  onClick={onStart}
-  disabled={points.length < 2}
-  className="w-full rounded-full py-2 text-[11px] font-bold uppercase tracking-wider text-white transition-colors disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-400"
-  style={points.length >= 2 ? { backgroundColor: BUILDER_ACCENT } : undefined}
->
-  {t("buildRouteStart")}
-</button>
+              {showLandWarning
+                ? t("buildRouteLandRejected")
+                : points.length < 2
+                  ? t("buildRouteAddMore", { n: 2 - points.length })
+                  : t("buildRouteReadyToStart")}
+            </p>
+            <button
+              type="button"
+              onClick={onStart}
+              disabled={points.length < 2}
+              className="w-full rounded-full py-2 text-[11px] font-bold uppercase tracking-wider text-white transition-colors disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-400"
+              style={points.length >= 2 ? { backgroundColor: BUILDER_ACCENT } : undefined}
+            >
+              {t("buildRouteStart")}
+            </button>
           </div>
         </div>
       )}
@@ -761,9 +760,7 @@ function ExpeditionBuilderPanel({
       {/* Stap: onderweg — nog compacter, gewoon een smalle statusstrook, zodat
           het uitzicht op de varende boot en de globe eromheen vrij blijft. */}
       {step === "traveling" && (
-        <div
-          className="pointer-events-auto flex items-center gap-3 rounded-full border border-zinc-200 bg-white/80 py-2 pl-4 pr-2 shadow-lg backdrop-blur-md"
-        >
+        <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-zinc-200 bg-white/80 py-2 pl-4 pr-2 shadow-lg backdrop-blur-md">
           <span className="h-2 w-2 shrink-0 animate-pulse rounded-full" style={{ backgroundColor: BUILDER_ACCENT }} />
           <p style={displayFont} className="text-xs font-bold text-zinc-900">
             {t("buildRouteTraveling")}
@@ -807,53 +804,53 @@ function ExpeditionBuilderPanel({
             </button>
           </div>
 
-            <div className="overflow-y-auto p-6">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest" style={{ color: BUILDER_ACCENT }}>
-                {t("buildRouteReportTitle")}
-              </p>
-              <h3 style={displayFont} className="mb-4 text-xl font-bold tracking-tight text-zinc-900">
-                {t("buildRouteArrivedTitle")}
-              </h3>
+          <div className="overflow-y-auto p-6">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-widest" style={{ color: BUILDER_ACCENT }}>
+              {t("buildRouteReportTitle")}
+            </p>
+            <h3 style={displayFont} className="mb-4 text-xl font-bold tracking-tight text-zinc-900">
+              {t("buildRouteArrivedTitle")}
+            </h3>
 
-              {(() => {
-                const report = computeRouteReport(points, transport);
-                return (
-                  <ul className="mb-5 space-y-2 text-sm">
-                    <li className="flex items-baseline justify-between gap-4">
-                      <span className="text-zinc-500">{t("buildRouteReportTransport")}</span>
-                      <span className="font-semibold text-zinc-900">{t(TRANSPORT_TRANSLATION_KEYS[transport.id])}</span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-4">
-                      <span className="text-zinc-500">{t("buildRouteReportRoute")}</span>
-                      <span className="font-semibold text-zinc-900">
-                        {points.length} {t("buildRoutePointsCounter")}
-                      </span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-4">
-                      <span className="text-zinc-500">{t("buildRouteReportDistance")}</span>
-                      <span style={displayFont} className="font-bold tabular-nums text-zinc-900">
-                        {report.totalKm.toLocaleString()} {t("buildRouteReportKm")}
-                      </span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-4">
-                      <span className="text-zinc-500">{t("buildRouteReportDuration")}</span>
-                      <span style={displayFont} className="font-bold tabular-nums text-zinc-900">
-                        {report.days} {t("buildRouteReportDays")}
-                      </span>
-                    </li>
-                  </ul>
-                );
-              })()}
+            {(() => {
+              const report = computeRouteReport(points, transport);
+              return (
+                <ul className="mb-5 space-y-2 text-sm">
+                  <li className="flex items-baseline justify-between gap-4">
+                    <span className="text-zinc-500">{t("buildRouteReportTransport")}</span>
+                    <span className="font-semibold text-zinc-900">{t(TRANSPORT_TRANSLATION_KEYS[transport.id])}</span>
+                  </li>
+                  <li className="flex items-baseline justify-between gap-4">
+                    <span className="text-zinc-500">{t("buildRouteReportRoute")}</span>
+                    <span className="font-semibold text-zinc-900">
+                      {points.length} {t("buildRoutePointsCounter")}
+                    </span>
+                  </li>
+                  <li className="flex items-baseline justify-between gap-4">
+                    <span className="text-zinc-500">{t("buildRouteReportDistance")}</span>
+                    <span style={displayFont} className="font-bold tabular-nums text-zinc-900">
+                      {report.totalKm.toLocaleString()} {t("buildRouteReportKm")}
+                    </span>
+                  </li>
+                  <li className="flex items-baseline justify-between gap-4">
+                    <span className="text-zinc-500">{t("buildRouteReportDuration")}</span>
+                    <span style={displayFont} className="font-bold tabular-nums text-zinc-900">
+                      {report.days} {t("buildRouteReportDays")}
+                    </span>
+                  </li>
+                </ul>
+              );
+            })()}
 
-              <button
-                type="button"
-                onClick={onExit}
-                className="w-full rounded-full py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors"
-                style={{ backgroundColor: BUILDER_ACCENT }}
-              >
-                {t("buildRouteNewJourney")}
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={onExit}
+              className="w-full rounded-full py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors"
+              style={{ backgroundColor: BUILDER_ACCENT }}
+            >
+              {t("buildRouteNewJourney")}
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -909,7 +906,8 @@ export default function Home() {
       setInvalidClickPoint({ lat, lon, nonce: Date.now() });
       setShowLandWarning(true);
       if (landWarningTimeoutRef.current) window.clearTimeout(landWarningTimeoutRef.current);
-landWarningTimeoutRef.current = window.setTimeout(() => setShowLandWarning(false), 2200) as unknown as number;      return;
+      landWarningTimeoutRef.current = window.setTimeout(() => setShowLandWarning(false), 2200);
+      return;
     }
 
     setBuilderPoints((current) => (current.length >= 3 ? current : [...current, { lat, lon }]));
@@ -944,7 +942,7 @@ landWarningTimeoutRef.current = window.setTimeout(() => setShowLandWarning(false
       dateLabel: known?.dateLabel ?? null,
       point,
     });
-    milestonePopupTimeoutRef.current = window.setTimeout(() => setMilestonePopup(null), 6000) as unknown as number;
+    milestonePopupTimeoutRef.current = window.setTimeout(() => setMilestonePopup(null), 6000);
   };
 
   // Eén en dezelfde "sluiten/terug"-knop voor élke stap. Was er nog een
