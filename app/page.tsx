@@ -738,21 +738,22 @@ function ExpeditionBuilderPanel({
               className={`mb-3 text-[11px] ${showLandWarning ? "font-semibold" : "text-zinc-500"}`}
               style={showLandWarning ? { color: "#c0483f" } : undefined}
             >
-              {showLandWarning
-  ? t("buildRouteLandRejected")
-  : points.length < 2
-    ? `${t("buildRouteAddMore")} (${2 - points.length})` 
-    : t("buildRouteReadyToStart")
-            </p>
-            <button
-              type="button"
-              onClick={onStart}
-              disabled={points.length < 2}
-              className="w-full rounded-full py-2 text-[11px] font-bold uppercase tracking-wider text-white transition-colors disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-400"
-              style={points.length >= 2 ? { backgroundColor: BUILDER_ACCENT } : undefined}
-            >
-              {t("buildRouteStart")}
-            </button>
+              <p>
+  {showLandWarning
+    ? t("buildRouteLandRejected")
+    : points.length < 2
+      ? `${t("buildRouteAddMore")} (${2 - points.length})`
+      : t("buildRouteReadyToStart")}
+</p>
+<button
+  type="button"
+  onClick={onStart}
+  disabled={points.length < 2}
+  className="w-full rounded-full py-2 text-[11px] font-bold uppercase tracking-wider text-white transition-colors disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-400"
+  style={points.length >= 2 ? { backgroundColor: BUILDER_ACCENT } : undefined}
+>
+  {t("buildRouteStart")}
+</button>
           </div>
         </div>
       )}
