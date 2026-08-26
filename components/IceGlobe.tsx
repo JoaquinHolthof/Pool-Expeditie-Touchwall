@@ -526,7 +526,7 @@ const IceGlobe = forwardRef<IceGlobeHandle, IceGlobeProps>(function IceGlobe(
         </Suspense>
 
         <OrbitControls
-          ref={controlsRef}
+          ref={controlsRef as any}
           enablePan={false}
           enableZoom={false}
           minPolarAngle={0}

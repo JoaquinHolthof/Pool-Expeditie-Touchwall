@@ -739,10 +739,10 @@ function ExpeditionBuilderPanel({
               style={showLandWarning ? { color: "#c0483f" } : undefined}
             >
               {showLandWarning
-                ? t("buildRouteLandRejected")
-                : points.length < 2
-                  ? t("buildRouteAddMore", { n: 2 - points.length })
-                  : t("buildRouteReadyToStart")}
+  ? t("buildRouteLandRejected")
+  : points.length < 2
+    ? `${t("buildRouteAddMore")} (${2 - points.length})` 
+    : t("buildRouteReadyToStart")
             </p>
             <button
               type="button"
@@ -908,8 +908,7 @@ export default function Home() {
       setInvalidClickPoint({ lat, lon, nonce: Date.now() });
       setShowLandWarning(true);
       if (landWarningTimeoutRef.current) window.clearTimeout(landWarningTimeoutRef.current);
-      landWarningTimeoutRef.current = window.setTimeout(() => setShowLandWarning(false), 2200);
-      return;
+landWarningTimeoutRef.current = window.setTimeout(() => setShowLandWarning(false), 2200) as unknown as number;      return;
     }
 
     setBuilderPoints((current) => (current.length >= 3 ? current : [...current, { lat, lon }]));
@@ -944,7 +943,7 @@ export default function Home() {
       dateLabel: known?.dateLabel ?? null,
       point,
     });
-    milestonePopupTimeoutRef.current = window.setTimeout(() => setMilestonePopup(null), 6000);
+    milestonePopupTimeoutRef.current = window.setTimeout(() => setMilestonePopup(null), 6000) as unknown as number;
   };
 
   // Eén en dezelfde "sluiten/terug"-knop voor élke stap. Was er nog een
