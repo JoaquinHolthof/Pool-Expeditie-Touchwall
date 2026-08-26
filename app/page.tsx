@@ -741,7 +741,7 @@ function ExpeditionBuilderPanel({
               {showLandWarning
                 ? t("buildRouteLandRejected")
                 : points.length < 2
-                  ? t("buildRouteAddMore", { n: 2 - points.length })
+                  ? t("buildRouteAddMore").replace("{n}", String(2 - points.length))
                   : t("buildRouteReadyToStart")}
             </p>
             <button
@@ -877,11 +877,11 @@ export default function Home() {
     null
   );
   const [showLandWarning, setShowLandWarning] = useState(false);
-  const landWarningTimeoutRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const landWarningTimeoutRef = useRef<number | null>(null);
   // "Je vaart nu langs..."-pop-up, getoond zodra het voertuig een mijlpaal
   // van de eigen route passeert.
   const [milestonePopup, setMilestonePopup] = useState<MilestonePopupData | null>(null);
-  const milestonePopupTimeoutRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const milestonePopupTimeoutRef = useRef<number | null>(null);
 
   const handleClosePanel = () => {
     // Roept de 3D-kant aan om de selectie te resetten (camera vliegt terug,
